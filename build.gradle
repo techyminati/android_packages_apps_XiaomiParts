@@ -1,0 +1,56 @@
+repositories {
+    google()
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10"
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 30
+        targetSdkVersion 30
+    }
+
+    lintOptions {
+        ignore 'ProtectedPermissions'
+        // These depend on translations
+        ignore 'ExtraTranslation', 'ImpliedQuantity', 'MissingQuantity', 'MissingTranslation'
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = ['res']
+            java.srcDirs = ['src']
+            manifest.srcFile 'AndroidManifest.xml'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.10"
+}
